@@ -1,0 +1,1 @@
+Layer da progetto QGIS: /home/mfortini/Documenti/2026/PUG/shapefile/PUG.qgz

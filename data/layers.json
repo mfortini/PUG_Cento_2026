@@ -1,0 +1,717 @@
+{
+  "title": "PUG — Cento",
+  "description": "Consultazione cartografica",
+  "center": [
+    44.7742804,
+    11.29059495
+  ],
+  "zoom": 12,
+  "defaultOpacity": 0.85,
+  "basemaps": [
+    {
+      "id": "osm",
+      "title": "OpenStreetMap",
+      "url": "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+      "attribution": "&copy; OpenStreetMap",
+      "default": true
+    }
+  ],
+  "overlays": [
+    {
+      "id": "CLE_Tavola_1_20000",
+      "title": "CLE_Tavola_1_20000",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 26,
+      "url": "tiles/cle/CLE_Tavola_1_20000/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.6938479,
+          11.1357961
+        ],
+        [
+          44.8547129,
+          11.4453938
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "CLE_Tavola_2a_2000",
+      "title": "CLE_Tavola_2a_2000",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 28,
+      "url": "tiles/cle/CLE_Tavola_2a_2000/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.7182581,
+          11.2731184
+        ],
+        [
+          44.7343589,
+          11.3040553
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "CLE_Tavola_2b_2000",
+      "title": "CLE_Tavola_2b_2000",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 27,
+      "url": "tiles/cle/CLE_Tavola_2b_2000/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.7846618,
+          11.2798325
+        ],
+        [
+          44.8007436,
+          11.3108012
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "ST.3b_Strategia_comunale_Cento",
+      "title": "ST.3b_Strategia_comunale_Cento",
+      "group": "Strategia",
+      "section": "strategia",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 11,
+      "url": "tiles/strategia/ST.3b_Strategia_comunale_Cento/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.6885335,
+          11.0794835
+        ],
+        [
+          44.8573253,
+          11.4677611
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "ST.4c_-_Progetto_di_rete_ecologica_locale___Cento",
+      "title": "ST.4c_-_Progetto_di_rete_ecologica_locale___Cento",
+      "group": "Strategia",
+      "section": "strategia",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 23,
+      "url": "tiles/strategia/ST.4c_-_Progetto_di_rete_ecologica_locale___Cento/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.6756864,
+          11.1347752
+        ],
+        [
+          44.8879427,
+          11.526125
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "ST.5c_-_Azioni_di_progetto___Cento",
+      "title": "ST.5c_-_Azioni_di_progetto___Cento",
+      "group": "Strategia",
+      "section": "strategia",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 22,
+      "url": "tiles/strategia/ST.5c_-_Azioni_di_progetto___Cento/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.6756888,
+          11.1346621
+        ],
+        [
+          44.8880016,
+          11.5261981
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "Tav_1a_-_Carta_delle_indagini",
+      "title": "Tav_1a_-_Carta_delle_indagini",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 25,
+      "url": "tiles/cle/Tav_1a_-_Carta_delle_indagini/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.765812,
+          11.2400254
+        ],
+        [
+          44.8462244,
+          11.3948823
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "Tav_1b_-_Carta_delle_indagini",
+      "title": "Tav_1b_-_Carta_delle_indagini",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 24,
+      "url": "tiles/cle/Tav_1b_-_Carta_delle_indagini/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.7020549,
+          11.20195
+        ],
+        [
+          44.7825049,
+          11.3566831
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "Tav_2a_-_Carta_Geologico_Tecnica_per_la_Microzonazione_Sismica",
+      "title": "Tav_2a_-_Carta_Geologico_Tecnica_per_la_Microzonazione_Sismica",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 20,
+      "url": "tiles/cle/Tav_2a_-_Carta_Geologico_Tecnica_per_la_Microzonazione_Sismica/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.765812,
+          11.2400254
+        ],
+        [
+          44.8462244,
+          11.3948823
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "Tav_2b_-_Carta_Geologico_Tecnica_per_la_Microzonazione_Sismica",
+      "title": "Tav_2b_-_Carta_Geologico_Tecnica_per_la_Microzonazione_Sismica",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 17,
+      "url": "tiles/cle/Tav_2b_-_Carta_Geologico_Tecnica_per_la_Microzonazione_Sismica/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.7020549,
+          11.20195
+        ],
+        [
+          44.7825049,
+          11.3566831
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "Tav_3a_-_Carta_delle_frequenze_naturali_dei_terreni",
+      "title": "Tav_3a_-_Carta_delle_frequenze_naturali_dei_terreni",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 15,
+      "url": "tiles/cle/Tav_3a_-_Carta_delle_frequenze_naturali_dei_terreni/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.765812,
+          11.2400254
+        ],
+        [
+          44.8462244,
+          11.3948823
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "Tav_3b_-_Carta_delle_frequenze_naturali_dei_terreni",
+      "title": "Tav_3b_-_Carta_delle_frequenze_naturali_dei_terreni",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 1,
+      "url": "tiles/cle/Tav_3b_-_Carta_delle_frequenze_naturali_dei_terreni/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.7020549,
+          11.20195
+        ],
+        [
+          44.7825049,
+          11.3566831
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "Tav_4a_-_Carta_delle_Microzone_Omogenee_in_Prospettiva_Sismica",
+      "title": "Tav_4a_-_Carta_delle_Microzone_Omogenee_in_Prospettiva_Sismica",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 14,
+      "url": "tiles/cle/Tav_4a_-_Carta_delle_Microzone_Omogenee_in_Prospettiva_Sismica/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.765812,
+          11.2400254
+        ],
+        [
+          44.8462244,
+          11.3948823
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "Tav_4b_-_Carta_delle_Microzone_Omogenee_in_Prospettiva_Sismica",
+      "title": "Tav_4b_-_Carta_delle_Microzone_Omogenee_in_Prospettiva_Sismica",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 13,
+      "url": "tiles/cle/Tav_4b_-_Carta_delle_Microzone_Omogenee_in_Prospettiva_Sismica/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.7020549,
+          11.20195
+        ],
+        [
+          44.7825049,
+          11.3566831
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "Tav_5a_-_Carta_della_velocita_delle_onde_di_taglio",
+      "title": "Tav_5a_-_Carta_della_velocita_delle_onde_di_taglio",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 12,
+      "url": "tiles/cle/Tav_5a_-_Carta_della_velocita_delle_onde_di_taglio/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.765812,
+          11.2400254
+        ],
+        [
+          44.8462244,
+          11.3948823
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "Tav_5b_-_Carta_della_velocita_delle_onde_di_taglio",
+      "title": "Tav_5b_-_Carta_della_velocita_delle_onde_di_taglio",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 10,
+      "url": "tiles/cle/Tav_5b_-_Carta_della_velocita_delle_onde_di_taglio/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.7020549,
+          11.20195
+        ],
+        [
+          44.7825049,
+          11.3566831
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "Tav_6a_-_Carta_di_microzonazione_sismica_livello_3_-_FAPGA",
+      "title": "Tav_6a_-_Carta_di_microzonazione_sismica_livello_3_-_FAPGA",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 9,
+      "url": "tiles/cle/Tav_6a_-_Carta_di_microzonazione_sismica_livello_3_-_FAPGA/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.765812,
+          11.2400254
+        ],
+        [
+          44.8462244,
+          11.3948823
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "Tav_6b_-_Carta_di_microzonazione_sismica_livello_3_-_FAPGA",
+      "title": "Tav_6b_-_Carta_di_microzonazione_sismica_livello_3_-_FAPGA",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 2,
+      "url": "tiles/cle/Tav_6b_-_Carta_di_microzonazione_sismica_livello_3_-_FAPGA/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.7020549,
+          11.20195
+        ],
+        [
+          44.7825049,
+          11.3566831
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "Tav_7a_-_Carta_di_microzonazione_sismica_livello_3_-_FH0105",
+      "title": "Tav_7a_-_Carta_di_microzonazione_sismica_livello_3_-_FH0105",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 3,
+      "url": "tiles/cle/Tav_7a_-_Carta_di_microzonazione_sismica_livello_3_-_FH0105/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.765812,
+          11.2400254
+        ],
+        [
+          44.8462244,
+          11.3948823
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "Tav_7b_-_Carta_di_microzonazione_sismica_livello_3_-_FH0105",
+      "title": "Tav_7b_-_Carta_di_microzonazione_sismica_livello_3_-_FH0105",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 4,
+      "url": "tiles/cle/Tav_7b_-_Carta_di_microzonazione_sismica_livello_3_-_FH0105/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.7020549,
+          11.20195
+        ],
+        [
+          44.7825049,
+          11.3566831
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "Tav_8a_-_Carta_di_microzonazione_sismica_livello_3_-_FH0510",
+      "title": "Tav_8a_-_Carta_di_microzonazione_sismica_livello_3_-_FH0510",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 5,
+      "url": "tiles/cle/Tav_8a_-_Carta_di_microzonazione_sismica_livello_3_-_FH0510/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.765812,
+          11.2400254
+        ],
+        [
+          44.8462244,
+          11.3948823
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "Tav_8b_-_Carta_di_microzonazione_sismica_livello_3_-_FH0510",
+      "title": "Tav_8b_-_Carta_di_microzonazione_sismica_livello_3_-_FH0510",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 6,
+      "url": "tiles/cle/Tav_8b_-_Carta_di_microzonazione_sismica_livello_3_-_FH0510/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.7020549,
+          11.20195
+        ],
+        [
+          44.7825049,
+          11.3566831
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "Tav_9a_-_Carta_di_microzonazione_sismica_livello_3_-_FH0515",
+      "title": "Tav_9a_-_Carta_di_microzonazione_sismica_livello_3_-_FH0515",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 7,
+      "url": "tiles/cle/Tav_9a_-_Carta_di_microzonazione_sismica_livello_3_-_FH0515/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.765812,
+          11.2400254
+        ],
+        [
+          44.8462244,
+          11.3948823
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "Tav_9b_-_Carta_di_microzonazione_sismica_livello_3_-_FH0515",
+      "title": "Tav_9b_-_Carta_di_microzonazione_sismica_livello_3_-_FH0515",
+      "group": "Cle",
+      "section": "cle",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 8,
+      "url": "tiles/cle/Tav_9b_-_Carta_di_microzonazione_sismica_livello_3_-_FH0515/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.7020549,
+          11.20195
+        ],
+        [
+          44.7825049,
+          11.3566831
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "VT.2.1b_Sicurezza_territoriale_vulnerabilita_Cento",
+      "title": "VT.2.1b_Sicurezza_territoriale_vulnerabilita_Cento",
+      "group": "Vincoli",
+      "section": "vincoli",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 21,
+      "url": "tiles/vincoli/VT.2.1b_Sicurezza_territoriale_vulnerabilita_Cento/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.6846635,
+          11.0911152
+        ],
+        [
+          44.8585174,
+          11.5432977
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "VT.2.2b_Tutele_ambientali_rete_ecologica_Cento",
+      "title": "VT.2.2b_Tutele_ambientali_rete_ecologica_Cento",
+      "group": "Vincoli",
+      "section": "vincoli",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 19,
+      "url": "tiles/vincoli/VT.2.2b_Tutele_ambientali_rete_ecologica_Cento/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.6836299,
+          11.1362806
+        ],
+        [
+          44.8572426,
+          11.5883221
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "VT2_3b_Tutele_paesagg_storico-cult_Cento",
+      "title": "VT2_3b_Tutele_paesagg_storico-cult_Cento",
+      "group": "Vincoli",
+      "section": "vincoli",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 18,
+      "url": "tiles/vincoli/VT2_3b_Tutele_paesagg_storico-cult_Cento/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.6840996,
+          11.1339261
+        ],
+        [
+          44.8575878,
+          11.5860556
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    },
+    {
+      "id": "VT2_4b_Reti_tecnologiche_e_rispetti_Cento",
+      "title": "VT2_4b_Reti_tecnologiche_e_rispetti_Cento",
+      "group": "Vincoli",
+      "section": "vincoli",
+      "type": "xyz",
+      "scheme": "xyz",
+      "order": 16,
+      "url": "tiles/vincoli/VT2_4b_Reti_tecnologiche_e_rispetti_Cento/{z}/{x}/{y}.webp",
+      "bounds": [
+        [
+          44.6874006,
+          11.1329472
+        ],
+        [
+          44.8559384,
+          11.520978
+        ]
+      ],
+      "minZoom": 10,
+      "maxZoom": 16,
+      "opacity": 0.85,
+      "visible": false
+    }
+  ],
+  "vectors": [
+    {
+      "id": "confine",
+      "title": "Confine comunale",
+      "url": "data/confine.geojson",
+      "style": {
+        "color": "#1d4ed8",
+        "weight": 2,
+        "fillOpacity": 0.05
+      },
+      "visible": true
+    },
+    {
+      "id": "cle",
+      "title": "CLE (poligoni)",
+      "url": "data/cle.geojson",
+      "style": {
+        "color": "#b45309",
+        "weight": 1,
+        "fillOpacity": 0.25
+      },
+      "visible": false
+    }
+  ]
+}
