@@ -242,6 +242,103 @@ h1 {
   word-break: break-word;
 }
 
+.layer-radio-none {
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #334155;
+}
+
+.layer-tree-group {
+  margin: 0.35rem 0;
+  border: 1px solid #334155;
+  border-radius: 6px;
+  background: rgba(15, 23, 42, 0.35);
+}
+
+.layer-tree-group[open] {
+  border-color: #475569;
+}
+
+.layer-tree-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2rem 0.35rem;
+  padding: 0.45rem 0.55rem;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.layer-tree-summary::-webkit-details-marker {
+  display: none;
+}
+
+.layer-tree-summary::before {
+  content: "▸";
+  flex: 0 0 auto;
+  color: var(--accent);
+  line-height: 1;
+  transition: transform 0.15s ease;
+}
+
+.layer-tree-group[open] > .layer-tree-summary::before {
+  transform: rotate(90deg);
+}
+
+.layer-tree-summary-row {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.layer-tree-summary-title {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.layer-tree-count {
+  font-size: 0.75rem;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+
+.layer-tree-summary-sub {
+  flex: 1 1 100%;
+  margin-left: 1.15rem;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--muted);
+}
+
+.layer-group-help {
+  margin: 0 0.55rem 0.35rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: 4px;
+  background: #334155;
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+.layer-group-help summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.layer-group-help p {
+  margin: 0.35rem 0 0;
+}
+
+.layer-tree-items {
+  padding: 0 0.55rem 0.45rem 0.65rem;
+  border-top: 1px solid #334155;
+}
+
 .layer-section-title {
   margin: 0.6rem 0 0.25rem;
   padding-top: 0.5rem;

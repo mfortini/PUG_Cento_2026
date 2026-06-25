@@ -26,6 +26,26 @@ function dedupeByLayerId(items) {
   return [...byKey.values()];
 }
 
+const SECTION_ORDER = ["cle", "strategia", "vincoli"];
+
+const SECTION_META = {
+  cle: {
+    title: "CLE / MS",
+    subtitle: "Condizioni Limite per l'Emergenza e microzonazione sismica",
+    helpTitle: "Cos'è CLE?",
+    helpText:
+      "CLE (Condizioni Limite per l'Emergenza) sono le condizioni che il territorio deve rispettare in situazione di emergenza sismica, definite nelle tavole cartografiche comunali del PUG. In questo gruppo trovi anche le carte di microzonazione sismica (MS) del quadro conoscitivo diagnostico. Per definizioni e tavole ufficiali consultare i documenti pubblicati dai Comuni.",
+  },
+  strategia: {
+    title: "Strategia",
+    subtitle: "SQUEA e azioni di piano",
+  },
+  vincoli: {
+    title: "Vincoli",
+    subtitle: "Tavole VT del PUG",
+  },
+};
+
 const LayerPanelControl = L.Control.extend({
   initialize(pugChoices, onPugSelect, options) {
     L.Util.setOptions(this, options);
@@ -33,6 +53,7 @@ const LayerPanelControl = L.Control.extend({
     this._onPugSelect = onPugSelect;
     this._selectedPug = null;
     this._open = false;
+    this._groupOpen = {};
   },
 
   isOpen() {
@@ -81,7 +102,7 @@ const LayerPanelControl = L.Control.extend({
     help.innerHTML = [
       "<p><strong>Come usare la mappa</strong></p>",
       "<ul>",
-      "<li>Scegli una tavola dall'elenco qui sotto.</li>",
+      "<li>Apri un gruppo (CLE, Strategia, Vincoli) e scegli una tavola.</li>",
       "<li>Regola l'opacità con lo slider in alto a destra.</li>",
       "<li>Attiva o disattiva il confine comunale dall'header.</li>",
       "</ul>",
@@ -126,15 +147,45 @@ const LayerPanelControl = L.Control.extend({
       : "none";
     const input = this._form.querySelector(`input[name="pug-layer"][value="${value}"]`);
     if (input) input.checked = true;
+
+    if (layer) {
+      const choice = this._pugChoices.find((c) => c.layer === layer);
+      if (choice?.section) {
+        this._groupOpen[choice.section] = true;
+        const group = this._form.querySelector(
+          `.layer-tree-group[data-section="${choice.section}"]`
+        );
+        if (group) group.open = true;
+      }
+    }
+  },
+
+  _saveGroupState() {
+    if (!this._form) return;
+    this._form.querySelectorAll(".layer-tree-group").forEach((el) => {
+      const section = el.dataset.section;
+      if (section) this._groupOpen[section] = el.open;
+    });
+  },
+
+  _appendRadioItem(container, choice, index) {
+    const label = L.DomUtil.create("label", "layer-radio-item", container);
+    const input = L.DomUtil.create("input", "", label);
+    input.type = "radio";
+    input.name = "pug-layer";
+    input.value = String(index);
+    input.checked = this._selectedPug === choice.layer;
+    L.DomUtil.create("span", "", label).textContent = choice.label;
+    L.DomEvent.on(input, "change", () => {
+      if (input.checked) this._onPugSelect(choice.layer, choice.cfg);
+    });
   },
 
   _render() {
+    this._saveGroupState();
     this._form.innerHTML = "";
 
-    const pugTitle = L.DomUtil.create("div", "layer-section-title", this._form);
-    pugTitle.textContent = "Elenco tavole";
-
-    const noneLabel = L.DomUtil.create("label", "layer-radio-item", this._form);
+    const noneLabel = L.DomUtil.create("label", "layer-radio-item layer-radio-none", this._form);
     const noneInput = L.DomUtil.create("input", "", noneLabel);
     noneInput.type = "radio";
     noneInput.name = "pug-layer";
@@ -145,18 +196,51 @@ const LayerPanelControl = L.Control.extend({
       if (noneInput.checked) this._onPugSelect(null, null);
     });
 
+    const bySection = new Map();
     this._pugChoices.forEach((choice, index) => {
-      const label = L.DomUtil.create("label", "layer-radio-item", this._form);
-      const input = L.DomUtil.create("input", "", label);
-      input.type = "radio";
-      input.name = "pug-layer";
-      input.value = String(index);
-      input.checked = this._selectedPug === choice.layer;
-      L.DomUtil.create("span", "", label).textContent = choice.label;
-      L.DomEvent.on(input, "change", () => {
-        if (input.checked) this._onPugSelect(choice.layer, choice.cfg);
-      });
+      const section = choice.section || "altro";
+      if (!bySection.has(section)) bySection.set(section, []);
+      bySection.get(section).push({ choice, index });
     });
+
+    for (const section of SECTION_ORDER) {
+      const items = bySection.get(section);
+      if (!items?.length) continue;
+
+      const meta = SECTION_META[section] || { title: section, subtitle: "" };
+      const sorted = [...items].sort((a, b) =>
+        a.choice.label.localeCompare(b.choice.label, "it", { sensitivity: "base" })
+      );
+
+      const group = L.DomUtil.create("details", "layer-tree-group", this._form);
+      group.dataset.section = section;
+      group.open = Boolean(this._groupOpen[section]);
+
+      const summary = L.DomUtil.create("summary", "layer-tree-summary", group);
+      const titleRow = L.DomUtil.create("div", "layer-tree-summary-row", summary);
+      L.DomUtil.create("span", "layer-tree-summary-title", titleRow).textContent = meta.title;
+      L.DomUtil.create("span", "layer-tree-count", titleRow).textContent = `(${sorted.length})`;
+      if (meta.subtitle) {
+        L.DomUtil.create("span", "layer-tree-summary-sub", summary).textContent = meta.subtitle;
+      }
+
+      L.DomEvent.on(group, "toggle", () => {
+        this._groupOpen[section] = group.open;
+      });
+
+      if (meta.helpText) {
+        const help = L.DomUtil.create("details", "layer-group-help", group);
+        L.DomUtil.create("summary", "", help).textContent = meta.helpTitle || "Info";
+        const helpBody = L.DomUtil.create("p", "", help);
+        helpBody.textContent = meta.helpText;
+        L.DomEvent.on(help, "click", L.DomEvent.stopPropagation);
+      }
+
+      const itemsEl = L.DomUtil.create("div", "layer-tree-items", group);
+      sorted.forEach(({ choice, index }) => {
+        this._appendRadioItem(itemsEl, choice, index);
+      });
+    }
   },
 });
 
@@ -243,7 +327,12 @@ async function init() {
     if (existing) return existing;
 
     exclusiveLayers.add(layer);
-    const choice = { layer, label, cfg: layerCfg };
+    const choice = {
+      layer,
+      label,
+      cfg: layerCfg,
+      section: layerCfg?.section || "altro",
+    };
     pugChoices.push(choice);
     if (layerCfg?.bounds) {
       overlayRefs.push({ layer, cfg: layerCfg, label });
@@ -295,7 +384,7 @@ async function init() {
       bounds: o.bounds ? L.latLngBounds(o.bounds) : undefined,
       tms: scheme === "tms",
     });
-    const label = `[${o.group || "layer"}] ${o.title}`;
+    const label = o.title || o.id;
     const choice = registerPugChoice(layer, label, o);
     if (o.visible && pendingVisible === null) {
       pendingVisible = choice;
