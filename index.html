@@ -11,7 +11,7 @@
   <header class="header">
     <div>
       <h1 id="map-title">PUG — Cento</h1>
-      <p id="map-desc" class="subtitle">Consultazione cartografica</p>
+      <p id="map-desc" class="subtitle">Seleziona una tavola dal pannello Layer per visualizzarla sulla mappa.</p>
     </div>
     <div class="header-actions">
       <label class="confine-toggle">
@@ -29,8 +29,17 @@
   <main id="map"></main>
 
   <footer class="footer">
-    <span id="map-attribution" class="footer-attribution">Basemap &copy; OpenStreetMap</span>
-    <span id="coords"></span>
+    <p class="footer-disclaimer">
+      Questo sito è una rielaborazione dei documenti del PUG di Cento pubblicati
+      <a href="https://www.comune.bondeno.fe.it/pug-piano-urbanistico/documenti-di-piano/" target="_blank" rel="noopener noreferrer">sul sito del Comune di Bondeno</a>.
+      I documenti ufficiali sono in consultazione pubblica
+      <a href="https://www.comune.cento.fe.it/it/news/2003041" target="_blank" rel="noopener noreferrer">come indicato dal Comune di Cento</a>;
+      per ogni dubbio consultare sempre i documenti ufficiali.
+    </p>
+    <div class="footer-meta">
+      <span id="map-attribution" class="footer-attribution">Basemap &copy; OpenStreetMap</span>
+      <span id="coords"></span>
+    </div>
   </footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>

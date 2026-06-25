@@ -701,17 +701,6 @@
         "fillOpacity": 0.05
       },
       "visible": true
-    },
-    {
-      "id": "cle",
-      "title": "CLE (poligoni)",
-      "url": "data/cle.geojson",
-      "style": {
-        "color": "#b45309",
-        "weight": 1,
-        "fillOpacity": 0.25
-      },
-      "visible": false
     }
   ]
 }

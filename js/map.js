@@ -32,32 +32,90 @@ const LayerPanelControl = L.Control.extend({
     this._pugChoices = pugChoices;
     this._onPugSelect = onPugSelect;
     this._selectedPug = null;
+    this._open = false;
   },
 
-  onAdd() {
+  isOpen() {
+    return this._open;
+  },
+
+  setOpen(open) {
+    this._open = open;
+    if (!this._panel || !this._toggle || !this._container) return;
+    this._panel.hidden = !open;
+    this._toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    this._container.classList.toggle("is-open", open);
+    this._toggle.textContent = open ? "Layer ▲" : "Layer ▼";
+  },
+
+  bindMap(map) {
+    this._map = map;
+    map.on("click", () => {
+      if (this.isOpen()) this.setOpen(false);
+    });
+  },
+
+  onAdd(map) {
     const container = L.DomUtil.create("div", "leaflet-control layer-radio-control");
     L.DomEvent.disableClickPropagation(container);
     L.DomEvent.disableScrollPropagation(container);
 
     const toggle = L.DomUtil.create("button", "layer-radio-toggle", container);
     toggle.type = "button";
-    toggle.title = "Layer";
+    toggle.title = "Mostra o nascondi elenco tavole";
     toggle.setAttribute("aria-expanded", "false");
-    toggle.innerHTML = "Layer";
+    toggle.textContent = "Layer ▼";
 
     const panel = L.DomUtil.create("div", "layer-radio-panel", container);
-    panel.hidden = true;
+
+    const panelHeader = L.DomUtil.create("div", "layer-panel-header", panel);
+    const panelTitle = L.DomUtil.create("span", "layer-panel-title", panelHeader);
+    panelTitle.textContent = "Tavole PUG";
+    const closeBtn = L.DomUtil.create("button", "layer-panel-close", panelHeader);
+    closeBtn.type = "button";
+    closeBtn.title = "Chiudi pannello layer";
+    closeBtn.setAttribute("aria-label", "Chiudi pannello layer");
+    closeBtn.textContent = "×";
+
+    const help = L.DomUtil.create("div", "layer-help", panel);
+    help.innerHTML = [
+      "<p><strong>Come usare la mappa</strong></p>",
+      "<ul>",
+      "<li>Scegli una tavola dall'elenco qui sotto.</li>",
+      "<li>Regola l'opacità con lo slider in alto a destra.</li>",
+      "<li>Attiva o disattiva il confine comunale dall'header.</li>",
+      "</ul>",
+    ].join("");
+
     this._form = L.DomUtil.create("div", "layer-radio-form", panel);
 
     L.DomEvent.on(toggle, "click", () => {
-      const open = panel.hidden;
-      panel.hidden = !open;
-      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      this.setOpen(!this.isOpen());
+    });
+    L.DomEvent.on(closeBtn, "click", () => {
+      this.setOpen(false);
     });
 
     this._container = container;
+    this._toggle = toggle;
+    this._panel = panel;
+    this._onKeyDown = (e) => {
+      if (e.key === "Escape" && this.isOpen()) {
+        this.setOpen(false);
+      }
+    };
+    document.addEventListener("keydown", this._onKeyDown);
+
     this._render();
+    this.setOpen(true);
+    this.bindMap(map);
     return container;
+  },
+
+  onRemove() {
+    if (this._onKeyDown) {
+      document.removeEventListener("keydown", this._onKeyDown);
+    }
   },
 
   setSelectedPug(layer) {
@@ -74,7 +132,7 @@ const LayerPanelControl = L.Control.extend({
     this._form.innerHTML = "";
 
     const pugTitle = L.DomUtil.create("div", "layer-section-title", this._form);
-    pugTitle.textContent = "Tavole PUG";
+    pugTitle.textContent = "Elenco tavole";
 
     const noneLabel = L.DomUtil.create("label", "layer-radio-item", this._form);
     const noneInput = L.DomUtil.create("input", "", noneLabel);
@@ -112,9 +170,8 @@ async function init() {
   const cfg = await res.json();
 
   document.getElementById("map-title").textContent = cfg.title || "Mappa";
-  if (cfg.description) {
-    document.getElementById("map-desc").textContent = cfg.description;
-  }
+  document.getElementById("map-desc").textContent =
+    "Seleziona una tavola dal pannello Layer per visualizzarla sulla mappa.";
 
   const overlays = dedupeByLayerId(
     (cfg.overlays || []).filter((o) => o.type === "xyz")
@@ -250,12 +307,7 @@ async function init() {
   });
   layerPanel.addTo(map);
 
-  const sortedVectors = [...(cfg.vectors || [])].sort((a, b) =>
-    (a.title || "").localeCompare(b.title || "", "it", { sensitivity: "base" })
-  );
-
-  const confineCfg = sortedVectors.find((v) => v.id === "confine");
-  const overlayVectors = sortedVectors.filter((v) => v.id !== "confine");
+  const confineCfg = (cfg.vectors || []).find((v) => v.id === "confine");
 
   const confineToggle = document.getElementById("confine-toggle");
   const confineDefaultVisible = confineCfg?.visible !== false;
@@ -301,38 +353,6 @@ async function init() {
   } else if (confineToggle) {
     confineToggle.disabled = true;
   }
-
-  const vectorPromises = overlayVectors.map((v) =>
-    fetch(v.url)
-      .then((r) => r.json())
-      .then((geojson) => {
-        const layer = L.geoJSON(geojson, {
-          style: v.style || { color: "#333", weight: 1 },
-          onEachFeature: (feature, lyr) => {
-            const props = feature.properties || {};
-            const html = Object.entries(props)
-              .map(([k, val]) => `<strong>${k}</strong>: ${val}`)
-              .join("<br>");
-            if (html) lyr.bindPopup(html);
-          },
-        });
-        const choice = registerPugChoice(
-          layer,
-          v.title,
-          v.bounds ? { bounds: v.bounds } : null
-        );
-        if (v.visible && pendingVisible === null) {
-          pendingVisible = choice;
-        }
-        return choice;
-      })
-      .catch((err) => {
-        console.warn("Vector load failed:", v.url, err);
-        return null;
-      })
-  );
-
-  await Promise.all(vectorPromises);
 
   if (pendingVisible) {
     selectPugOverlay(pendingVisible.layer, pendingVisible.cfg);
